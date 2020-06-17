@@ -31,7 +31,16 @@ namespace Puissance4.Tests
         }
 
         [Fact]
-        public void TestCase()
+        public void TestCaseNouvellePartie()
+        {
+            var partie = new Game();
+            for (int i = 0; i < 6; i++)
+                for (int j = 0; j < 7; j++)
+                    Assert.Equal(partie.EtatCase(j, i), EtatCase.Vide);
+        }
+
+        [Fact]
+        public void TestCaseReprise()
         {
             var partie = new Game(partieTest);
             for (int i = 0; i < 6; i++)
