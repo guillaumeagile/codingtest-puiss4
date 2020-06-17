@@ -9,14 +9,16 @@ namespace puissance4.src
     {
         public const int NB_LIGNES = 6;
         public const int NB_COLONNES = 7;
-        private EtatCase[,] cases = new EtatCase[NB_COLONNES, NB_LIGNES];
+        private EtatCase[,] cases = new EtatCase[NB_LIGNES, NB_COLONNES];
 
         /// <summary>
         /// Démarre une nouvelle partie
         /// </summary>
         public Game()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < NB_LIGNES; i++)
+                for (int j = 0; j < NB_COLONNES; j++)
+                    cases[i, j] = src.EtatCase.Vide;
         }
 
         /// <summary>
@@ -25,7 +27,9 @@ namespace puissance4.src
         /// <param name="jeu"></param>
         public Game(EtatCase[,] jeu)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < NB_LIGNES; i++)
+                for (int j = 0; j < NB_COLONNES; j++)
+                    cases[i, j] = jeu[i, j];
         }
 
         /// <summary>
@@ -45,7 +49,7 @@ namespace puissance4.src
         /// <returns></returns>
         public EtatCase EtatCase(int colonne, int ligne)
         {
-            throw new NotImplementedException("EtatCase");
+            return cases[ligne, colonne];
         }
 
         /// <summary>
