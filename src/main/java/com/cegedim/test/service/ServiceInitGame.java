@@ -19,10 +19,21 @@ public class ServiceInitGame {
   private static Joueur JJ = new Joueur(Couleur.Jaune, NAME_J1);
   private static Joueur JR = new Joueur(Couleur.Rouge, NAME_J2);
 
-  public Grille InitGrille() {
-    return new Grille(this.InitCases());
+  private Grille grille;
+
+  public void InitGrille() {
+    this.grille = new Grille(this.InitCases());
   }
 
+  public Joueur getWinner() {
+    if (this.checkHorizental() != null)
+      return this.checkHorizental();
+    else if (this.checkVertical() != null)
+      return this.checkHorizental();
+    else if (this.checkDiagonal() != null)
+      return this.checkDiagonal();
+    return null;
+  }
 
   /**
    * generate the case in the pdf
@@ -65,5 +76,98 @@ public class ServiceInitGame {
 
     return cases;
   }
+
+  /**
+   * check if we have winner horizentaly
+   * 
+   * @return winner player
+   */
+  private Joueur checkHorizental() {
+    for (int j = 0; j < 6; j++) {
+      for (int i = 0; i < 7; i++) {
+        if (grille.getCases().contains(new Case(j, i, JJ))
+            && grille.getCases().contains(new Case(j, i + 1, JJ))
+            && grille.getCases().contains(new Case(j, i + 2, JJ))
+            && grille.getCases().contains(new Case(j, i + 4, JJ))) {
+          return JJ;
+        }
+
+        if (grille.getCases().contains(new Case(j, i, JR))
+            && grille.getCases().contains(new Case(j, i + 1, JR))
+            && grille.getCases().contains(new Case(j, i + 2, JR))
+            && grille.getCases().contains(new Case(j, i + 4, JR))) {
+          return JR;
+        }
+      }
+    }
+    return null;
+  }
+
+  /**
+   * check if we have winner verticaly
+   * 
+   * @return winner player
+   */
+  private Joueur checkVertical() {
+    for (int j = 0; j < 7; j++) {
+      for (int i = 0; i < 6; i++) {
+        if (grille.getCases().contains(new Case(i, j, JJ))
+            && grille.getCases().contains(new Case(i + 1, j, JJ))
+            && grille.getCases().contains(new Case(i + 2, j, JJ))
+            && grille.getCases().contains(new Case(i + 3, j + 4, JJ))) {
+          return JJ;
+        }
+
+        if (grille.getCases().contains(new Case(i, j, JR))
+            && grille.getCases().contains(new Case(i + 1, j, JR))
+            && grille.getCases().contains(new Case(i + 2, j, JR))
+            && grille.getCases().contains(new Case(i + 3, j + 4, JR))) {
+          return JR;
+        }
+      }
+    }
+    return null;
+  }
+
+  /**
+   * check if we have winner in diagonal
+   * 
+   * @return winner player
+   */
+  private Joueur checkDiagonal() {
+    for (int j = 0; j < 7; j++) {
+      for (int i = 0; i < 6; i++) {
+        if ((grille.getCases().contains(new Case(i - 1, j - 1, JJ))
+            && grille.getCases().contains(new Case(i - 2, j - 2, JJ))
+            && grille.getCases().contains(new Case(i + 1, j + 1, JJ))
+            && grille.getCases().contains(new Case(i + 2, j + 2, JJ))) ||
+
+            (grille.getCases().contains(new Case(i - 1, j + 1, JJ))
+                && grille.getCases().contains(new Case(i - 2, j + 2, JJ))
+                && grille.getCases().contains(new Case(i + 1, j - 1, JJ))
+                && grille.getCases().contains(new Case(i + 2, j - 2, JJ))))
+
+        {
+          return JJ;
+        }
+
+        if ((grille.getCases().contains(new Case(i - 1, j - 1, JR))
+            && grille.getCases().contains(new Case(i - 2, j - 2, JR))
+            && grille.getCases().contains(new Case(i + 1, j + 1, JR))
+            && grille.getCases().contains(new Case(i + 2, j + 2, JR))) ||
+
+            (grille.getCases().contains(new Case(i - 1, j + 1, JR))
+                && grille.getCases().contains(new Case(i - 2, j + 2, JR))
+                && grille.getCases().contains(new Case(i + 1, j - 1, JR))
+                && grille.getCases().contains(new Case(i + 2, j - 2, JR))))
+
+        {
+          return JR;
+        }
+      }
+    }
+    return null;
+  }
+
 
 }
