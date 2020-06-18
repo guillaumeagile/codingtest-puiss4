@@ -1,9 +1,13 @@
 package com.cegedim.test;
 
+import com.cegedim.test.service.ServiceInitGame;
+
 public class Main {
 
   public static void main(String[] args) {
-    System.out.println("aaaa");
+    ServiceInitGame game = new ServiceInitGame();
+    game.InitGrille();
   }
+
 
 }
