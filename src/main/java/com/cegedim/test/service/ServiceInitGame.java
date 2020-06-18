@@ -7,8 +7,11 @@ import com.cegedim.test.model.Couleur;
 import com.cegedim.test.model.Grille;
 import com.cegedim.test.model.Joueur;
 
+
 /**
- * @author TARIK
+ * Service to init game.
+ * 
+ * @author TARIK.
  *
  */
 public class ServiceInitGame {
@@ -21,26 +24,35 @@ public class ServiceInitGame {
 
   private Grille grille;
 
-  public void InitGrille() {
-    this.grille = new Grille(this.InitCases());
+  /**
+   * init the Grille with cases.
+   */
+  public void initGrille() {
+    this.grille = new Grille(this.initCases());
   }
 
+  /**
+   * Get the winning player.
+   * 
+   * @return Player
+   */
   public Joueur getWinner() {
-    if (this.checkHorizental() != null)
+    if (this.checkHorizental() != null) {
       return this.checkHorizental();
-    else if (this.checkVertical() != null)
+    } else if (this.checkVertical() != null) {
       return this.checkHorizental();
-    else if (this.checkDiagonal() != null)
+    } else if (this.checkDiagonal() != null) {
       return this.checkDiagonal();
+    }
     return null;
   }
 
   /**
-   * generate the case in the pdf
+   * generate the case in the pdf.
    * 
    * @return list of cases
    */
-  private List<Case> InitCases() {
+  private List<Case> initCases() {
     List<Case> cases = new ArrayList<Case>();
     cases.add(new Case(0, 0, JR));
     cases.add(new Case(0, 1, JJ));
@@ -78,7 +90,7 @@ public class ServiceInitGame {
   }
 
   /**
-   * check if we have winner horizentaly
+   * check if we have winner horizentaly.
    * 
    * @return winner player
    */
@@ -104,7 +116,7 @@ public class ServiceInitGame {
   }
 
   /**
-   * check if we have winner verticaly
+   * check if we have winner verticaly.
    * 
    * @return winner player
    */
@@ -130,7 +142,7 @@ public class ServiceInitGame {
   }
 
   /**
-   * check if we have winner in diagonal
+   * check if we have winner in diagonal.
    * 
    * @return winner player
    */
@@ -140,28 +152,22 @@ public class ServiceInitGame {
         if ((grille.getCases().contains(new Case(i - 1, j - 1, JJ))
             && grille.getCases().contains(new Case(i - 2, j - 2, JJ))
             && grille.getCases().contains(new Case(i + 1, j + 1, JJ))
-            && grille.getCases().contains(new Case(i + 2, j + 2, JJ))) ||
-
-            (grille.getCases().contains(new Case(i - 1, j + 1, JJ))
+            && grille.getCases().contains(new Case(i + 2, j + 2, JJ)))
+            || (grille.getCases().contains(new Case(i - 1, j + 1, JJ))
                 && grille.getCases().contains(new Case(i - 2, j + 2, JJ))
                 && grille.getCases().contains(new Case(i + 1, j - 1, JJ))
-                && grille.getCases().contains(new Case(i + 2, j - 2, JJ))))
-
-        {
+                && grille.getCases().contains(new Case(i + 2, j - 2, JJ)))) {
           return JJ;
         }
 
         if ((grille.getCases().contains(new Case(i - 1, j - 1, JR))
             && grille.getCases().contains(new Case(i - 2, j - 2, JR))
             && grille.getCases().contains(new Case(i + 1, j + 1, JR))
-            && grille.getCases().contains(new Case(i + 2, j + 2, JR))) ||
-
-            (grille.getCases().contains(new Case(i - 1, j + 1, JR))
+            && grille.getCases().contains(new Case(i + 2, j + 2, JR)))
+            || (grille.getCases().contains(new Case(i - 1, j + 1, JR))
                 && grille.getCases().contains(new Case(i - 2, j + 2, JR))
                 && grille.getCases().contains(new Case(i + 1, j - 1, JR))
-                && grille.getCases().contains(new Case(i + 2, j - 2, JR))))
-
-        {
+                && grille.getCases().contains(new Case(i + 2, j - 2, JR)))) {
           return JR;
         }
       }

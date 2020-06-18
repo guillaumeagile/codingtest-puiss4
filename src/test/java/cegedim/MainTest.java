@@ -10,7 +10,7 @@ public class MainTest {
   @Test
   public void test() {
     ServiceInitGame game = new ServiceInitGame();
-    game.InitGrille();
+    game.initGrille();
     assertEquals(game.getWinner().getCouleur(), Couleur.Rouge);
   }
 }
